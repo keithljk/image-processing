@@ -2,7 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/perspective">Perspective</router-link> |
+      <router-link to="/unsharp">UnsharpMarking</router-link> |
+      <router-link to="/boundary">BoundaryExtraction</router-link> |
+      <router-link to="/region">RegionFilling</router-link>
     </div>
     <router-view />
   </div>

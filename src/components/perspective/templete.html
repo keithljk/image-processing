@@ -1,0 +1,41 @@
+<div class="perspective">
+    <BlockUI :message="msg" v-if="isBlockUi"></BlockUI>
+    <b-card-group deck>
+        <b-card header="透視變形 (Perspective Transformation)">
+            <p class="card-text mt-2">
+                透視變形是一種影像處理技術，能將因拍攝角度造成的影像變形校正，其步驟如下 : 
+            </p>
+            <b-list-group >
+                <b-list-group-item variant="secondary">先在原圖上取四個點，當作處理後的四個角的定位(x1,y1,x2,y2...)</b-list-group-item>
+                <b-list-group-item variant="secondary">將x1,y1等四個角和變形後的x1',y1'四個角代入公式(x = ax'+by'+cx'y'+d)和(y = ex'+fy'+gx'y'+h)</b-list-group-item>
+                <b-list-group-item variant="secondary">運用gauss-jordan elimination回推a,b,c,d,e...等8個參數，並將8個參數代回公式，運用inverse mapping的概念算出變形後的每個像素</b-list-group-item>
+                <b-list-group-item variant="secondary">再使用bilinear interpolation對變形後的圖像做清晰度的補強</b-list-group-item>
+            </b-list-group>
+        </b-card>
+    </b-card-group>
+    
+    <!-- 選擇檔案 -->
+    <div class="contentDiv">
+        <input type="file" id="imgFile" @change="imgChange" accept="jpg">
+    </div>
+
+    <!-- 原始圖像 -->
+    <div class="transformDiv">
+        <canvas ref="myCanvas" @click="pick"></canvas>
+    </div>
+    <canvas ref="myCanvas0" style="display:none"></canvas>
+
+    <!-- 轉換按鈕 -->
+    <div class="contentDiv" ref="controlDiv" id="controlDiv">
+        <div style="color:red;width:100%;text-align: center;">目前已選擇點數：
+            <label>{{point.length}}</label>
+        </div>
+        <button @click="next()">transform</button>
+        <button @click="reset">reset</button>
+    </div>
+
+    <!-- 轉換後影像 -->
+    <div class="contentDiv transformDiv">
+        <canvas ref="myCanvas2"></canvas>
+    </div>
+</div>

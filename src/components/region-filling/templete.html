@@ -1,0 +1,38 @@
+<div>
+    <BlockUI :message="msg" v-if="isBlockUi"></BlockUI>
+    <b-card-group deck>
+        <b-card header="區域填充 (Region Filling)">
+            <p class="card-text mt-2">
+                區域填充是一種影像處理技術，能將影像區域填滿，其步驟如下 : 
+            </p>
+            <b-list-group >
+                <b-list-group-item variant="secondary">將原始影像預計要填滿的任意一點做起點(我是用小畫家設定填滿區域的起始位置)</b-list-group-item>
+                <b-list-group-item variant="secondary">使用3 X 3大小，其十字區域像素為0的element，與轉負片的原圖做Dilation，將圈內的白色填滿</b-list-group-item>
+                <b-list-group-item variant="secondary">將Dilation後的圖與轉負片的原圖做OR gate</b-list-group-item>
+                <b-list-group-item variant="secondary">再將其上述結果轉負片，得結果</b-list-group-item>
+            </b-list-group>
+        </b-card>
+    </b-card-group>
+
+    <!-- 選擇檔案 -->
+    <div class="contentDiv">
+        <input type="file" id="imgFile" @change="imgChange" accept="jpg">
+    </div>
+
+    <!-- 原始圖像 -->
+    <div class="contentDiv transformDiv">
+        <canvas ref="myCanvas"></canvas>
+    </div>
+    <canvas ref="myCanvas2"style="display:none"></canvas>
+    <canvas ref="myCanvas3"style="display:none"></canvas>
+
+    <!-- 轉換按鈕 -->
+    <div class="contentDiv" id="controlDiv">
+        <button id="unsharp" @click="next">transform</button>
+    </div>
+
+    <!-- 轉換後影像 -->
+    <div class="contentDiv transformDiv">
+        <canvas ref="myCanvas4"></canvas>
+    </div>
+</div>
