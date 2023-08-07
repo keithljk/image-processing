@@ -26,6 +26,7 @@ export default {
   },
   mounted() {
     this.initCanvas();
+    this.imgChange();
   },
   methods: {
     initCanvas() {
@@ -37,9 +38,15 @@ export default {
       this.ctx0 = this.canvas0.getContext("2d");
     },
     imgChange(event) {
-      const file = event.target.files[0];
       let img = new Image();
-      img.src = URL.createObjectURL(file);
+
+      if (event) {
+        const file = event.target.files[0];
+        img.src = URL.createObjectURL(file);
+      } else {
+        const defaultImg = document.getElementById("defaultImg");
+        img.src = defaultImg.src;
+      }
       const vueData = this;
 
       img.onload = function () {
